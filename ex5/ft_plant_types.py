@@ -53,6 +53,17 @@ class Flower(Plant):
         self._is_blooming: bool = False
         self.set_color(color, False)
 
+    def bloom(self) -> None:
+        self._is_blooming = True
+
+    def show(self) -> None:
+        super(Flower, self).show()
+        print(f" Color: {self.get_color()}")
+        if not self._is_blooming:
+            print(f" {self._name} has not bloomed yet")
+        else:
+            print(f" {self._name} is blooming beautifully!")
+
     def set_color(self, color: str, log: bool = True) -> None:
         if len(color) > 0:
             self._color: str = color
@@ -67,17 +78,6 @@ class Flower(Plant):
     def get_color(self) -> str:
         return self._color
 
-    def bloom(self) -> None:
-        self._is_blooming = True
-
-    def show(self) -> None:
-        super(Flower, self).show()
-        print(f" Color: {self.get_color()}")
-        if not self._is_blooming:
-            print(f" {self._name} has not bloomed yet")
-        else:
-            print(f" {self._name} is blooming beautifully!")
-
 
 class Tree(Plant):
     def __init__(self, name: str, height: float,
@@ -85,22 +85,6 @@ class Tree(Plant):
         super(Tree, self).__init__(name, height, age)
         self.set_trunk_diameter(trunk_diameter, False)
         self._produce_shade: bool = False
-
-    def set_trunk_diameter(self, trunk_diameter: float,
-                           log: bool = True) -> None:
-        if trunk_diameter > 0:
-            self._trunk_diameter: float = trunk_diameter
-            if log:
-                print("Trunk diameter updated:",
-                      self.get_trunk_diameter())
-        else:
-            print(f"{self.get_name()}:",
-                  "Error, trunk diamater can't",
-                  "be negative or eqal to zero")
-            print("Trunk diameter update rejected")
-
-    def get_trunk_diameter(self) -> float:
-        return self._trunk_diameter
 
     def produce_shade(self) -> None:
         if not self._produce_shade:
@@ -120,6 +104,22 @@ class Tree(Plant):
             print(" Trunk diameter:",
                   self.get_trunk_diameter())
 
+    def set_trunk_diameter(self, trunk_diameter: float,
+                           log: bool = True) -> None:
+        if trunk_diameter > 0:
+            self._trunk_diameter: float = trunk_diameter
+            if log:
+                print("Trunk diameter updated:",
+                      self.get_trunk_diameter())
+        else:
+            print(f"{self.get_name()}:",
+                  "Error, trunk diamater can't",
+                  "be negative or eqal to zero")
+            print("Trunk diameter update rejected")
+
+    def get_trunk_diameter(self) -> float:
+        return self._trunk_diameter
+
 
 class Vegetable(Plant):
     def __init__(self, name: str, height: float, age: int,
@@ -127,6 +127,18 @@ class Vegetable(Plant):
         super().__init__(name, height, age)
         self.set_harvest_season(harvest_season, False)
         self.set_nutritional_value(0, False)
+
+    def grow(self, growth_rate: float) -> None:
+        super(Vegetable, self).grow(growth_rate)
+        nutritional_value: int = self.get_nutritional_value() + 1
+        self.set_nutritional_value(nutritional_value, False)
+
+    def show(self) -> None:
+        super(Vegetable, self).show()
+        print(" Harvest season:",
+              self.get_harvest_season())
+        print(" Nutritional value:",
+              self.get_nutritional_value())
 
     def set_harvest_season(self, harvest_season: str,
                            log: bool = True) -> None:
@@ -158,18 +170,6 @@ class Vegetable(Plant):
 
     def get_nutritional_value(self) -> int:
         return self._nutritional_value
-
-    def grow(self, growth_rate: float) -> None:
-        super(Vegetable, self).grow(growth_rate)
-        nutritional_value: int = self.get_nutritional_value() + 1
-        self.set_nutritional_value(nutritional_value, False)
-
-    def show(self) -> None:
-        super(Vegetable, self).show()
-        print(" Harvest season:",
-              self.get_harvest_season())
-        print(" Nutritional value:",
-              self.get_nutritional_value())
 
 
 if __name__ == "__main__":
