@@ -4,7 +4,7 @@ class Plant:
             self._age_call_count: int = 0
             self._grow_call_count: int = 0
             self._show_call_count: int = 0
-        
+
         def increment_age_call_count(self) -> None:
             self._age_call_count += 1
 
@@ -13,7 +13,7 @@ class Plant:
 
         def increment_show_call_count(self) -> None:
             self._show_call_count += 1
-        
+
         def display(self) -> None:
             print(f"Stats: {self._grow_call_count} grow,",
                   f"{self._age_call_count} age,",
@@ -29,7 +29,7 @@ class Plant:
     @staticmethod
     def is_year_old(age: int) -> bool:
         return age >= 365
-    
+
     @classmethod
     def create_anonymous(cls):
         return cls("anonymous", 0., 0)
@@ -77,6 +77,7 @@ class Plant:
     def get_age(self) -> float:
         return self._age
 
+
 class Flower(Plant):
     def __init__(self, name: str, height: float,
                  age: int, color: str) -> None:
@@ -118,7 +119,7 @@ class Tree(Plant):
 
         def increment_shade_call_count(self) -> None:
             self._shade_call_count += 1
-        
+
         def display(self) -> None:
             super(Tree.Statistical, self).display()
             print(f" {self._shade_call_count} shade")
@@ -221,8 +222,8 @@ class Seed(Flower):
     def __init__(self, name: str, height: float,
                  age: int, color: str) -> None:
         super(Seed, self).__init__(name, height, age, color)
-        
-    def set_seed_count(self, seed_count: int, 
+
+    def set_seed_count(self, seed_count: int,
                        log: bool = True) -> None:
         if seed_count >= 0:
             self._seed_count = seed_count
@@ -234,7 +235,7 @@ class Seed(Flower):
                   "Error, seed count can't be",
                   "less than 0")
             print("seed count update rejected")
-    
+
     def get_seed_count(self) -> int:
         return self._seed_count
 
@@ -245,6 +246,7 @@ class Seed(Flower):
 
 def show_plant_stat(plant: Plant) -> None:
     plant.stat.display()
+
 
 if __name__ == "__main__":
     rose = Flower("Rose", 15., 10, "red")
