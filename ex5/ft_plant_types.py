@@ -194,6 +194,6 @@ if __name__ == "__main__":
     tomato.show()
     print("[make tomato grow and age for 20 days]")
     for i in range(20):
-        tomato.grow(0.8)
+        tomato.grow(2.1)
         tomato.age()
     tomato.show()
